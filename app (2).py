@@ -11,7 +11,7 @@ from tensorflow.keras.callbacks import EarlyStopping
 st.title("💹 Crypto Price Prediction using RNN and LSTM")
 
 # Upload CSV file
-uploaded_file = st.file_uploader("Upload your crypto price CSV file", type=["csv"])
+uploaded_file = st.file_uploader("/content/1ECO-USD.csv", type=["csv"])
 if uploaded_file:
     df = pd.read_csv(uploaded_file)
     st.write("### Raw Data Preview", df.head())
