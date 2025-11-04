@@ -1,12 +1,10 @@
-# app.py
 import streamlit as st
 import pandas as pd
 import numpy as np
 import matplotlib.pyplot as plt
-import tensorflow as tf
+from sklearn.preprocessing import MinMaxScaler
 from tensorflow.keras.models import Sequential, load_model
 from tensorflow.keras.layers import LSTM, SimpleRNN, Dropout, Dense
-from sklearn.preprocessing import MinMaxScaler
 import os
 
 # ---- PAGE CONFIG ----
@@ -15,7 +13,7 @@ st.set_page_config(page_title="Crypto Price Prediction", page_icon="💰", layou
 st.title("💹 Cryptocurrency Price Prediction using RNN & LSTM")
 
 # ---- FILE UPLOAD ----
-uploaded_file = st.file_uploader("/content/1ECO-USD.csv", type=["csv"])
+uploaded_file = st.file_uploader("📂 Upload your Crypto CSV file", type=["csv"])
 
 if uploaded_file is not None:
     df = pd.read_csv(uploaded_file)
@@ -43,7 +41,7 @@ if uploaded_file is not None:
     seq_len = 60
     X, y = [], []
     for i in range(seq_len, len(scaled)):
-        X.append(scaled[i-seq_len:i])
+        X.append(scaled[i - seq_len:i])
         y.append(scaled[i])
     X, y = np.array(X), np.array(y)
 
@@ -121,6 +119,5 @@ if uploaded_file is not None:
     # ---- DOWNLOAD OPTION ----
     csv = df_future.to_csv(index=False).encode('utf-8')
     st.download_button("📥 Download Forecast CSV", csv, "forecast.csv", "text/csv")
-
 else:
     st.info("👆 Please upload a CSV file to start.")
