@@ -51,4 +51,4 @@ if uploaded_file:
         test_scaled = scaled[train_size - seq_len:]
         X_train, y_train = create_sequences(train_scaled, seq_len)
         X_test, y_test = create_sequences(test_scaled, seq_len)
-        X_train = X_train.reshape((X_train.shape[0], seq_le
+        X_train = X_train.reshape((X_train.shape[0], seq_le)
