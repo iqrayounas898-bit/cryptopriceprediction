@@ -44,11 +44,13 @@ if uploaded_file:
                 X.append(values[i:i+seq_length])
                 y.append(values[i+seq_length])
             return np.array(X), np.array(y)
+        seq_len = 60
+X_train, y_train = [], []
+for i in range(seq_len, len(scaled)):
+    X_train.append(scaled[i-seq_len:i])
+    y_train.append(scaled[i])
 
-        train_ratio = 0.8
-        train_size = int(len(scaled) * train_ratio)
-        train_scaled = scaled[:train_size]
-        test_scaled = scaled[train_size - seq_len:]
-        X_train, y_train = create_sequences(train_scaled, seq_len)
-        X_test, y_test = create_sequences(test_scaled, seq_len)
-        X_train = X_train.reshape((X_train.shape[0], seq_le)
+X_train, y_train = np.array(X_train), np.array(y_train)
+X_train = X_train.reshape((X_train.shape[0], seq_len, 1))
+
+
